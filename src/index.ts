@@ -1,17 +1,19 @@
 import express, { Application, Request, Response } from 'express'
 import ticketRouter from './ticket/ticket.router'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 const app: Application = express()
 const PORT = 3002
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use('/api/tickets', ticketRouter)
 app.post('/api/email', (req: Request, res: Response) => {
 	if (req.body.email) {
 		res.status(200).json({
 			message: 'ok',
-			email: req.body.email,
+			code: 1234,
 		})
 	}
 })
