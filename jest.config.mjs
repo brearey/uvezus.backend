@@ -1,12 +1,12 @@
-import { createDefaultPreset } from 'ts-jest';
+import { createDefaultPreset } from 'ts-jest'
 
-const tsJestTransformCfg = createDefaultPreset().transform;
+const tsJestTransformCfg = createDefaultPreset().transform
 
 /** @type {import("jest").Config} **/
 export default {
-  testEnvironment: 'node',
-  transform: {
-    ...tsJestTransformCfg,
-  },
-  testTimeout: 10000,
-};
+	testEnvironment: 'node',
+	transform: {
+		...tsJestTransformCfg,
+	},
+	testTimeout: 10000,
+}

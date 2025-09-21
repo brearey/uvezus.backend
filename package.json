@@ -1,54 +1,54 @@
 {
-  "name": "uvezus-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "prod": "node ./dist/index.js",
-    "dev": "ts-node-dev --rs ./src/index.ts",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "lint": "npx eslint 'src/**/*.{ts,js}'",
-    "format": "prettier --write ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/brearey/uvezus.backend.git"
-  },
-  "keywords": [],
-  "author": "lorriant",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/brearey/uvezus.backend/issues"
-  },
-  "homepage": "https://github.com/brearey/uvezus.backend#readme",
-  "devDependencies": {
-    "@eslint/js": "^9.27.0",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.2",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.15.19",
-    "axios": "^1.9.0",
-    "eslint": "^9.27.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.4.0",
-    "globals": "^16.1.0",
-    "jest": "^29.7.0",
-    "prettier": "^3.5.3",
-    "prisma": "^6.8.2",
-    "ts-jest": "^29.3.4",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1"
-  },
-  "dependencies": {
-    "@prisma/client": "^6.8.2",
-    "body-parser": "^2.2.0",
-    "cors": "^2.8.5",
-    "express": "^5.1.0"
-  }
+	"name": "uvezus-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "tsc --build --clean",
+		"prod": "node ./dist/index.js",
+		"dev": "ts-node-dev --rs ./src/index.ts",
+		"test": "jest",
+		"test:watch": "jest --watchAll",
+		"lint": "npx eslint 'src/**/*.{ts,js}'",
+		"format": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/brearey/uvezus.backend.git"
+	},
+	"keywords": [],
+	"author": "lorriant",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/brearey/uvezus.backend/issues"
+	},
+	"homepage": "https://github.com/brearey/uvezus.backend#readme",
+	"devDependencies": {
+		"@eslint/js": "^9.27.0",
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.2",
+		"@types/jest": "^29.5.14",
+		"@types/node": "^22.15.19",
+		"axios": "^1.9.0",
+		"eslint": "^9.27.0",
+		"eslint-config-prettier": "^10.1.5",
+		"eslint-plugin-prettier": "^5.4.0",
+		"globals": "^16.1.0",
+		"jest": "^29.7.0",
+		"prettier": "^3.5.3",
+		"prisma": "^6.8.2",
+		"ts-jest": "^29.3.4",
+		"ts-node": "^10.9.2",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.32.1"
+	},
+	"dependencies": {
+		"@prisma/client": "^6.8.2",
+		"body-parser": "^2.2.0",
+		"cors": "^2.8.5",
+		"express": "^5.1.0"
+	}
 }
