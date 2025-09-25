@@ -46,3 +46,7 @@ base url: `http://localhost:3002/api/tickets`
 
 # TODO:
 - add nginx server for proxy front and back
+
+# Packages required:
+- npm
+- forever
