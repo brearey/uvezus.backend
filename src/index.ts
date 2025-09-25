@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { httpLoggingMiddleware } from './utils/http-logger'
+import { sendEmail } from './utils/mail'
 
 const app: Application = express()
 const PORT = 3002
@@ -17,6 +18,9 @@ app.post('/api/email', (req: Request, res: Response) => {
 			code: 1234,
 		})
 	}
+})
+app.get('/api/send', (req, res) => {
+	res.send(sendEmail())
 })
 
 async function start() {
