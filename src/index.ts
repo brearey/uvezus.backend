@@ -1,14 +1,15 @@
 import express, { Application, Request, Response } from 'express'
-import ticketRouter from './ticket/ticket.router'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import { httpLoggingMiddleware } from './utils/http-logger'
 
 const app: Application = express()
 const PORT = 3002
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use('/api/tickets', ticketRouter)
+app.use(httpLoggingMiddleware)
+app.get('/api/health', (req, res) => res.send('ok'))
 app.post('/api/email', (req: Request, res: Response) => {
 	if (req.body.email) {
 		res.status(200).json({
