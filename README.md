@@ -43,3 +43,10 @@ base url: `http://localhost:3002/api/tickets`
 ### Format and lint code
 
 `npm run format && npm run lint`
+
+# TODO:
+- add nginx server for proxy front and back
+
+# Packages required:
+- npm
+- forever
