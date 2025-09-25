@@ -6,3 +6,4 @@ generated/
 .env
 *.db
 *.db-journal
+tsconfig.tsbuildinfo
