@@ -3,33 +3,34 @@ import nodemailer from 'nodemailer'
 // Создаем транспорт для подключения к SMTP Яндекса
 const transporter = nodemailer.createTransport({
 	host: 'smtp.yandex.ru',
-	port: 587, // 465 SSL
-	secure: false, // true использовать SSL
+	port: 587,
+	secure: false,
 	auth: {
 		user: 'brearey88@yandex.ru',
-		pass: process.env.YANDEX_APP_PASSWORD, // пароль приложения указан на странице Безопасность в id.yandex.ru (название пароля copder)
+		pass: process.env.YANDEX_APP_PASSWORD,
 	},
 })
 
-// Настройки письма
-const mailOptions = {
-	from: '"Ваше имя" <brearey88@yandex.ru>',
-	to: 'brearey4@gmail.com',
-	subject: 'Тестовое письмо',
-	text: 'Привет! Это простое текстовое письмо.',
-	html: '<h1>Hello</h1>',
-}
+export async function sendEmail(
+	to: string,
+	subject: string = 'Приложение Увезусь',
+	text: string = '',
+	html: string = ''
+): Promise<boolean> {
+	const mailOptions = {
+		from: '"Приложение Увезусь" <brearey88@yandex.ru>',
+		to: to,
+		subject: subject,
+		text: text,
+		html: html,
+	}
 
-export function sendEmail() {
-	return new Promise((resolve, reject) => {
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
-				console.log('Ошибка отправки:', error)
-				reject(error)
-			} else {
-				console.log('Письмо отправлено:', info.messageId)
-				resolve(info.messageId)
-			}
-		})
-	})
+	try {
+		const info = await transporter.sendMail(mailOptions)
+		console.log('Письмо отправлено:', info.messageId)
+		return true
+	} catch (error) {
+		console.log('Ошибка отправки:', error)
+		return false
+	}
 }
