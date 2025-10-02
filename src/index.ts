@@ -10,6 +10,10 @@ import { getRandom } from './utils/random'
 const app: Application = express()
 const PORT = 3002
 
+// Простейшее in-memory хранилище кодов подтверждения (на время разработки)
+// Ключ: email, Значение: { code, expiresAt }
+const verificationStore = new Map<string, { code: string; expiresAt: number }>()
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(httpLoggingMiddleware)
@@ -35,13 +39,15 @@ app.post('/api/email', async (req: Request, res: Response) => {
 		)
 
 		if (result) {
-			// TODO: Сохранить код в базу данных или кэш
-			// например: await saveVerificationCode(email, code)
+			// Сохраняем код во временное in-memory хранилище на 5 минут
+			verificationStore.set(email, {
+				code: String(code),
+				expiresAt: Date.now() + 5 * 60 * 1000,
+			})
 
 			res.status(200).json({
 				message: 'Код отправлен на email',
 				success: true,
-				code: code // TODO: don't send code
 			})
 		} else {
 			res.status(500).json({
@@ -55,6 +61,40 @@ app.post('/api/email', async (req: Request, res: Response) => {
 			message: 'Внутренняя ошибка сервера',
 			success: false,
 		})
+	}
+})
+
+// Проверка кода и редирект на /taxi-list при успехе
+app.get('/api/verify', (req: Request, res: Response) => {
+	try {
+		const { email, code } = req.query as { email?: string; code?: string }
+
+		if (!email || !code) {
+			return res.status(400).json({ message: 'Параметры email и code обязательны', success: false })
+		}
+
+		const record = verificationStore.get(email)
+		if (!record) {
+			return res.status(400).json({ message: 'Код не найден или истёк', success: false })
+		}
+
+		if (Date.now() > record.expiresAt) {
+			verificationStore.delete(email)
+			return res.status(400).json({ message: 'Код истёк', success: false })
+		}
+
+		if (String(code) !== record.code) {
+			return res.status(400).json({ message: 'Неверный код', success: false })
+		}
+
+		// Очистим код после успешной проверки
+		verificationStore.delete(email)
+
+		// 302 редирект на страницу такси
+		return res.redirect(302, '/taxi-list')
+	} catch (error) {
+		console.error('Ошибка в /api/verify:', error)
+		return res.status(500).json({ message: 'Внутренняя ошибка сервера', success: false })
 	}
 })
 
