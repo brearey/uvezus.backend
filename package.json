@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "tsc --build",
-		"clean": "tsc --build --clean",
+		"clean": "tsc --build --clean && rm -rf dist",
 		"prod": "NODE_ENV=production pm2 start --attach ./dist/index.js",
 		"dev": "ts-node-dev --rs ./src/index.ts",
 		"test": "jest",
