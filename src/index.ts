@@ -17,8 +17,8 @@ const verificationStore = new Map<string, { code: string; expiresAt: number }>()
 app.use(cors())
 app.use(bodyParser.json())
 app.use(httpLoggingMiddleware)
-app.get('/api/health', (req, res) => res.send('ok'))
-app.post('/api/email', async (req: Request, res: Response) => {
+app.get('/health', (req, res) => res.send('ok'))
+app.post('/email', async (req: Request, res: Response) => {
 	try {
 		const { email } = req.body
 
@@ -65,7 +65,7 @@ app.post('/api/email', async (req: Request, res: Response) => {
 })
 
 // Проверка кода и редирект на /taxi-list при успехе
-app.get('/api/verify', (req: Request, res: Response) => {
+app.get('/verify', (req: Request, res: Response) => {
 	try {
 		const { email, code } = req.query as { email?: string; code?: string }
 
@@ -93,7 +93,7 @@ app.get('/api/verify', (req: Request, res: Response) => {
 		// 302 редирект на страницу такси
 		return res.redirect(302, '/taxi-list')
 	} catch (error) {
-		console.error('Ошибка в /api/verify:', error)
+		console.error('Ошибка в /verify:', error)
 		return res.status(500).json({ message: 'Внутренняя ошибка сервера', success: false })
 	}
 })
